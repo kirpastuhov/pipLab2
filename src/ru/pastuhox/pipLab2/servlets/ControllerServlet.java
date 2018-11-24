@@ -1,4 +1,4 @@
-package ru.pastuhox.ServletTutorial.servlets;
+package ru.pastuhox.pipLab2.servlets;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,7 +45,7 @@ public class ControllerServlet extends HttpServlet
 
         RequestDispatcher requestDispatcher;
         if (check) {
-            requestDispatcher = request.getRequestDispatcher("GetUserServlet");
+            requestDispatcher = request.getRequestDispatcher("AreaCheckServlet");
         }
         else {
             requestDispatcher = request.getRequestDispatcher("index.jsp");

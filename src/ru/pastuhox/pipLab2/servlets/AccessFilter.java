@@ -1,4 +1,4 @@
-package ru.pastuhox.ServletTutorial.servlets;
+package ru.pastuhox.pipLab2.servlets;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.logging.Filter;
 import java.util.logging.LogRecord;
 
-@WebFilter("/GetUserServlet")
+@WebFilter("/AreaCheckServlet")
 public class AccessFilter implements Filter
 {
     public void init(FilterConfig arg0) throws ServletException {}
@@ -15,7 +15,7 @@ public class AccessFilter implements Filter
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws java.io.IOException, ServletException{
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
         HttpServletRequest req = (HttpServletRequest) servletRequest;
-        if (!req.getRequestURL().toString().endsWith("/GetUserServlet")){
+        if (!req.getRequestURL().toString().endsWith("/AreaCheckServlet")){
             filterChain.doFilter(servletRequest, servletResponse);
         }
         resp.sendRedirect("index.jsp");

@@ -1,4 +1,4 @@
-package ru.pastuhox.ServletTutorial.servlets;
+package ru.pastuhox.pipLab2.servlets;
 
 
 
@@ -14,8 +14,8 @@ import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-@WebServlet("/GetUserServlet")
-public class GetUserServlet extends HttpServlet
+@WebServlet("/AreaCheckServlet")
+public class AreaCheckServlet extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
 

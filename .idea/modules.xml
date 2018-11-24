@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ServletTutorial.iml" filepath="$PROJECT_DIR$/ServletTutorial.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pipLab2.iml" filepath="$PROJECT_DIR$/pipLab2.iml" />
     </modules>
   </component>
 </project>
