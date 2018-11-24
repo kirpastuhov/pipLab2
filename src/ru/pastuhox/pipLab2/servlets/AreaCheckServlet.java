@@ -1,10 +1,7 @@
 package ru.pastuhox.pipLab2.servlets;
 
-
-
 import com.google.gson.Gson;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,54 +11,22 @@ import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-@WebServlet("/AreaCheckServlet")
 public class AreaCheckServlet extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
-//        String userName = request.getParameter("chart_x").trim();
-//        if (userName == null || "".equals(userName))
-//        {
-//            userName = "Guest";
-//        }
-//
-//        String greetings = "Hello " + userName;
-//
-//        response.setContentType("text/plain");
-//        response.getWriter().write(greetings);
-
-
-        Map<String, String> options = new LinkedHashMap<>();
-        options.put("value1", "label1");
-        options.put("value2", "label2");
-        options.put("value3", "label3");
-        String json = new   Gson().toJson(options);
-
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
-
-
-    }
-
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-
 
         String strY = request.getParameter("chart_y").trim();
         String strX = request.getParameter("chart_x").trim();
         String strR = request.getParameter("chart_r").trim();
 
-        if (strX == null || "".equals(strX))
+        if ("".equals(strX))
         {
             strX = "not stated";
         }
         double X, Y, R;
         String greetings = "Out";
-
 
         X = Double.parseDouble(strX);
         Y = Double.parseDouble(strY);
@@ -97,22 +62,14 @@ public class AreaCheckServlet extends HttpServlet
         String json = new   Gson().toJson(options);
 
         response.setContentType("application/json");
-//        response.setContentType("text/plain");
 
         response.getWriter().write(json);
-
-//        response.setContentType("text/plain");
-//        response.getWriter().write(greetings);
-
-
-
     }
 
     private boolean isInCircle(double x, double y, double r)
     {
         return Math.pow(x, 2) + Math.pow(y, 2) <= Math.pow(r, 2)
                 && x <= 0 && y >= 0;
-
     }
 
     private boolean isInSquare(double x, double y, double r)

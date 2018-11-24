@@ -1,5 +1,4 @@
 function checkFields(form) {
-    // alert(form);
     return checkY(form);
 }
 

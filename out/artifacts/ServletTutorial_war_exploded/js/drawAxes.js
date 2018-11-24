@@ -105,17 +105,6 @@ function drawGenericText(text, x, y, size) {
     });
 }
 
-// function drawGenericPoint(draw_x, draw_y, fillStyle) {
-//     let _chart = $("#myCanvas");
-//     console.log("drawing the point");
-//     _chart.drawEllipse({
-//         fillStyle: fillStyle,
-//         x: draw_x, y: draw_y,
-//         width: 5, height: 5
-//     });
-//     console.log("Done");
-// }
-
 function drawAxisValues() {
     let _chart = $("#myCanvas");
     let _size = Number(_chart.attr("width").replace("px", ""));
@@ -134,8 +123,6 @@ function drawAxisValues() {
         drawGenericText(i, x1, y1 - _size / 40, 15);
         drawGenericText(i, y1 + _size / 20, _size / 2 - _size / 14 * i, 15);
     }
-
-
 }
 
 
