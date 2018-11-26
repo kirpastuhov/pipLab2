@@ -62,6 +62,8 @@
         <a href="javascript:void(0)" class="btn-submit sharp" style="border:1px solid #dddddd;" id="checkpoint">
           Check the point
         </a>
+          <%--<a href="mypage" class="btn-submit sharp" style="border:1px solid #dddddd;" id="checkall">--%>
+          <%--Check all graph</a>--%>
       </div>
     </form>
     <table class="table table-sm table-hover">

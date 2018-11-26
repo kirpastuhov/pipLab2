@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ServletTutorial:war2">
+    <output-path>$PROJECT_DIR$/out/artifacts/ServletTutorial_war2</output-path>
+    <root id="archive" name="ServletTutorial_war.war">
+      <element id="artifact" artifact-name="ServletTutorial:war exploded" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/lib/lombok.jar" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

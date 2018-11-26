@@ -1,3 +1,6 @@
+<%@ page import="ru.pastuhox.pipLab2.servlets.AreaCheckServletResult" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.util.concurrent.ConcurrentLinkedQueue" %>
 <%--
   Created by IntelliJ IDEA.
   User: Kirill-MBP
@@ -59,22 +62,56 @@
         <a href="javascript:void(0)" class="btn-submit sharp" style="border:1px solid #dddddd;" id="checkpoint">
           Check the point
         </a>
-          <%--<a href="mypage" class="btn-submit sharp" style="border:1px solid #dddddd;" id="checkall">--%>
-          <%--Check all graph</a>--%>
       </div>
     </form>
     <table class="table table-sm table-hover">
       <thead>
       <tr>
-        <th scope="col" id="time">Execution time</th>
-          <th scope="col">Result</th>
           <th scope="col">X</th>
           <th scope="col">Y</th>
           <th scope="col">R</th>
+          <th scope="col">Result</th>
+          <th scope="col" id="time">Execution time</th>
       </tr>
       </thead>
-      <tbody id="results">
-      </tbody>
+        <tbody id="results">
+        <%
+            if (session == null) {
+                return;
+            }
+
+            List<AreaCheckServletResult> history;
+
+            if (session.getAttribute("history") == null) {
+                history = new ArrayList<>();
+            } else {
+                history = new ArrayList<>((ConcurrentLinkedQueue<AreaCheckServletResult>)
+                        session.getAttribute("history"));
+            }
+
+            history.sort(Comparator.comparing(AreaCheckServletResult::getDate).reversed());
+        %>
+        <% for (final AreaCheckServletResult entry : history) { %>
+        <tr>
+
+            <td>
+                <%= entry.getX() %>
+            </td>
+            <td>
+                <%= entry.getY() %>
+            </td>
+            <td>
+                <%= entry.getR() %>
+            </td>
+            <td>
+                <%= entry.getIsIn() %>
+            </td>
+            <td>
+                <%= entry.getDate() %>
+            </td>
+        </tr>
+        <%}%>
+        </tbody>
     </table>
   </div>
 </div>

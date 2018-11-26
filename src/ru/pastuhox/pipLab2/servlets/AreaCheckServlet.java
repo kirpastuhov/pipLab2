@@ -1,15 +1,21 @@
 package ru.pastuhox.pipLab2.servlets;
 
 import com.google.gson.Gson;
+import lombok.SneakyThrows;
+import lombok.val;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class AreaCheckServlet extends HttpServlet
 {
@@ -51,19 +57,27 @@ public class AreaCheckServlet extends HttpServlet
         else if (isInTriangle(A_X, A_Y, B_X, B_Y, C_X, C_Y, X, Y))
             greetings = "In";
 
-        Map<String, String> options = new LinkedHashMap<>();
+//        Map<String, String> options = new LinkedHashMap<>();
+//
+//
+//        options.put("time", timeStamp);
+//        options.put("isIn", greetings);
+//        options.put("x", strX);
+//        options.put("y", strY);
+//        options.put("r", strR);
+//        String json = new Gson().toJson(options);
 
+        final val result = getResult(strX, strY, strR, greetings, timeStamp);
 
-        options.put("time", timeStamp);
-        options.put("isIn", greetings);
-        options.put("x", strX);
-        options.put("y", strY);
-        options.put("r", strR);
-        String json = new   Gson().toJson(options);
+        if (result == null) {
+            return;
+        }
 
-        response.setContentType("application/json");
+        addResultToHistory(request, result);
 
-        response.getWriter().write(json);
+//        response.setContentType("application/json");
+        sendResponse(response, result);
+//        response.getWriter().write(json);
     }
 
     private boolean isInCircle(double x, double y, double r)
@@ -86,4 +100,41 @@ public class AreaCheckServlet extends HttpServlet
         return (a >= 0 && b >= 0 && c >= 0) || (a <= 0 && b <= 0 && c <= 0);
     }
 
+
+    private void addResultToHistory(HttpServletRequest req, AreaCheckServletResult result) {
+        final val session = req.getSession();
+
+        String historyAttribute = "history";
+        synchronized (req.getSession()) {
+            if (session.getAttribute(historyAttribute) == null) {
+                session.setAttribute(historyAttribute, new ConcurrentLinkedQueue<AreaCheckServletResult>());
+            }
+        }
+
+        final val history = (ConcurrentLinkedQueue<AreaCheckServletResult>)
+                session.getAttribute(historyAttribute);
+
+
+        history.add(result);
+    }
+
+    private AreaCheckServletResult getResult(String x, String y, String r, String isIn, String date) {
+
+
+
+        return AreaCheckServletResult.builder()
+                .x(x)
+                .y(y)
+                .r(r)
+                .isIn(isIn)
+                .date(date)
+                .build();
+    }
+
+    @SneakyThrows
+    private void sendResponse(HttpServletResponse resp, AreaCheckServletResult result) {
+        resp.setContentType("application/json");
+        String json = new Gson().toJson(result);
+        resp.getWriter().write(json);
+    }
 }

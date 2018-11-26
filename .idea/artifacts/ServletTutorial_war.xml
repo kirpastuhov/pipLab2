@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ear" name="ServletTutorial:war">
+    <output-path>$PROJECT_DIR$/out/artifacts/ServletTutorial_war</output-path>
+    <root id="root">
+      <element id="artifact" artifact-name="ServletTutorial:war exploded" />
+    </root>
+  </artifact>
+</component>

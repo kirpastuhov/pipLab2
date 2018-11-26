@@ -28,6 +28,8 @@ function addColumn($tr, text) {
 async function addPoint(chart_x, chart_y) {
     const result = await sendRequest(chart_x, chart_y);
 
+    console.log(result);
+
     const draw_x = chart_x * 500 / 14 + 250;
     const draw_y = 250 - chart_y * 500 / 14;
 
@@ -37,7 +39,6 @@ async function addPoint(chart_x, chart_y) {
 async function sendRequest(chart_x, chart_y) {
     const chart_r = Number($("#inputR").val());
     const $tr = $("<tr/>");
-
     $.ajax({
         url: 'ControllerServlet',
         type: "post",
@@ -45,32 +46,34 @@ async function sendRequest(chart_x, chart_y) {
             chart_x: chart_x, chart_y: chart_y, chart_r: chart_r
         },
         success:
+
             function (responseText) {
                 $.each(responseText, function (key, value) {
-
-                    if (key === "time") {
+                    console.log(key);
+                    if (key === "date") {
                         addColumn($tr, value);
                         console.log(value);
                     }
-                    if (key === "x") {
+                    else if (key === "x") {
                         addColumn($tr, value);
                         console.log(value);
                     }
-                    if (key === "y") {
+                    else if (key === "y") {
                         addColumn($tr, value);
                         console.log(value);
                     }
-                    if (key === "r") {
+                   else  if (key === "r") {
                         addColumn($tr, value);
                         console.log(value);
                     }
-                    if (key === "isIn") {
+                    else if (key === "isIn") {
                         addColumn($tr, value);
                         console.log(value);
                     }
-
                 });
                 $("#results").prepend($tr);
+
             }
+
     });
 }
